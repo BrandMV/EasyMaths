@@ -24,8 +24,8 @@ export default {
             </h1>    
         </div>
         
-        <SidebarLink to="/" icon="fas fa-tasks">Mi progreso</SidebarLink>
-        <SidebarLink to="/" icon="fas fa-graduation-cap">Aprende</SidebarLink>
+        <SidebarLink to="/progress" icon="fas fa-tasks">Mi progreso</SidebarLink>
+        <SidebarLink to="/learn" icon="fas fa-graduation-cap">Aprende</SidebarLink>
         <SidebarLink to="/profile" icon="fas fa-cog">Mi cuenta</SidebarLink>
 
         <span class="collapse-icon" :class="{ 'rotate-180': collapsed }" @click="toggleSidebar"><i class="fas fa-angle-double-left"></i></span>
@@ -88,6 +88,9 @@ export default {
     .rotate-180{
         transform: rotate(180deg);
         transition: 0.3s linear;
+    }
+    i{
+        cursor: pointer;
     }
 </style>
 

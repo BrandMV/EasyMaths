@@ -159,6 +159,7 @@ export default {
             width: 70%;
         }
     }
+
     @media (max-width:550px) {
          
         h2{

@@ -37,7 +37,7 @@ import Achievements from '../Account/Profile/Achievements.vue'
 import { collapsed } from '../Account/Sidebar/state'
 
 export default {
-    
+  name: "Profile",
   components: { Sidebar, CardInfo, Title, Achievements },
   setup() {
       return { 
@@ -77,7 +77,6 @@ export default {
     @media (max-width:800px) {
         .profile-content{
             display: block;
-            border: 1px solid red;
         }
     }
     @media (max-width:650px) {
