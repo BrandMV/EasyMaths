@@ -1,12 +1,25 @@
 <script>
 import { collapsed, toggleSidebar, sidebarWidth } from './state'
 import SidebarLink from './SidebarLink.vue'
+import { fb } from '../../../firebase'
+
 export default {
     name: "Sidebar",
     props:{},
     components: { SidebarLink },
     setup() {
         return { collapsed, toggleSidebar, sidebarWidth }
+    },
+    methods:{
+        logout(){
+            fb.auth().signOut()
+            .then(() => {
+                this.$router.replace('/')
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
     }
     
 }
@@ -30,7 +43,7 @@ export default {
 
         <span class="collapse-icon" :class="{ 'rotate-180': collapsed }" @click="toggleSidebar"><i class="fas fa-angle-double-left"></i></span>
 
-        <span class="logout-icon"><i class="fas fa-sign-out-alt" ></i></span>
+        <span class="logout-icon" @click="logout"><i class="fas fa-sign-out-alt" ></i></span>
         
     </div>
 </template>

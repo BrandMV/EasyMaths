@@ -2,7 +2,7 @@
     <div :class="[ !collapsed ? 'card-info' : 'c-card-info']">
         <h3>{{name}}</h3>
         <img :src="img" alt="profile">
-        <i class="fas fa-edit"></i>
+        <i class="fas fa-edit" @click="$emit('modalShow')"></i>
     </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
     props: {
         name: String,
         img: String
+    },
+    methods: {
+        openModal(){
+            this.$emit()
+        }
     },
     setup(){
         return{

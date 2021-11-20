@@ -9,7 +9,7 @@
                 :key="index"
                 :class="[ trophie.completed ? 'completed' : 'incompleted' ]"
             >
-                <p>{{trophie.id}}</p>
+                <p>{{trophie.quiz}}</p>
 
             </div>
         </div>

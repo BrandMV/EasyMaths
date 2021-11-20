@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "firebase": "^8.10.0",
     "vue": "^3.0.0",
+    "vue-firestore": "^0.3.30",
     "vue-router": "^4.0.12",
     "vue-toast-notification": "^2.0"
   },

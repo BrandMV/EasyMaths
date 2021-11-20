@@ -29,7 +29,7 @@
 
 <script>
 import LrHeader from '../Header/LrHeader.vue'
-import { fb } from '../../firebase'
+import { fb, db } from '../../firebase'
 
 export default {
 
@@ -48,7 +48,54 @@ export default {
             event.preventDefault();
             
             fb.auth().createUserWithEmailAndPassword(this.email, this.password)
-            .catch(function(error) {
+            .then((user) => {
+                db.collection("users").doc(user.user.uid).set({
+                    name: this.username,
+                    achievements: 0,
+                    picture: "https://picsum.photos/200",
+                    quizzes: [
+                        {
+                            quiz: 1,
+                            completed: false,
+                            correct: 0
+                        },
+                        {
+                            quiz: 2,
+                            completed: false,
+                            correct: 0
+                        },
+                        {
+                            quiz: 3,
+                            completed: false,
+                            correct: 0
+                        },
+                        {
+                            quiz: 4,
+                            completed: false,
+                            correct: 0
+                        },
+                        {
+                            quiz: 5,
+                            completed: false,
+                            correct: 0
+                        },
+                        {
+                            quiz: 6,
+                            completed: false,
+                            correct: 0
+                        },
+                    ]
+                })
+                .then(() => {
+                    console.log("Usuario agregado correctamente");
+                    this.$router.replace('profile')
+                })
+                .catch(error => {
+                    console.log("Algo salió mal: ", error);
+                })
+
+            })
+            .catch((error) => {
             // Handle Errors here.
             var errorCode = error.code;
             if (errorCode == 'auth/weak-password'){

@@ -12,12 +12,12 @@
                 </div>
                 <form>
                     <div class="form-element">
-                        <input type="email" placeholder="Correo electrónico">
+                        <input type="email" placeholder="Correo electrónico" v-model="email">
                     </div>
                     <div class="form-element">
-                        <input type="password" placeholder="Contraseña">
+                        <input @keyup.enter="login($event)" type="password" placeholder="Contraseña" v-model="password">
                     </div>
-                    <input type="submit" class="signup-btn" value="Inicia Sesión">
+                    <input type="submit" class="signup-btn" value="Inicia Sesión" @click="login($event)">
                 </form>
             </section>
         </main>
@@ -26,12 +26,39 @@
 
 <script>
 import LrHeader from '../Header/LrHeader.vue'
-import fb from '../../firebase'
+import { fb } from '../../firebase'
 
 export default {
 
     name: "login",
-    components:{ LrHeader }
+    components:{ LrHeader },
+    data() {
+        return {
+            name: null,
+            email: null,
+            password: null
+        }
+    },
+    methods: {
+        login(event){
+            event.preventDefault();
+            
+            fb.auth().signInWithEmailAndPassword(this.email, this.password)
+            .then(() => {
+                this.$router.replace('profile')
+            })
+            .catch((error) => {
+                let errorCode = error.code
+                if(errorCode == 'auth/invalid-email')
+                    alert("Correo no válido")
+                if(errorCode == 'auth/user-not-found')
+                    alert("Parece que no tienes una cuenta :/")
+                if(errorCode == 'auth/wrong-password')
+                    alert("Verifica tu contraseña")
+            console.log(error);
+            })
+        }
+    },
     
 }
 </script>
