@@ -26,6 +26,7 @@
 
 <script>
 import LrHeader from '../Header/LrHeader.vue'
+import fb from '../../firebase'
 
 export default {
 

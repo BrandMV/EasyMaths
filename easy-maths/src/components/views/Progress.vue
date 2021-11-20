@@ -42,7 +42,7 @@ export default {
                 {title: "Números naturales", completed: true},
                 {title: "Técnicas de recuento", completed: false},
                 {title: "Números racionales", completed: true},
-                {title: "Suceiones", completed: false},
+                {title: "Sucesiones", completed: false},
             ]
         }
     }

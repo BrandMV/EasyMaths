@@ -12,15 +12,15 @@
                 </div>
                 <form>
                     <div class="form-element">
-                        <input type="text" placeholder="Nombre">
+                        <input type="text" placeholder="Nombre" v-model="username" required>
                     </div>
                     <div class="form-element">
-                        <input type="email" placeholder="Correo electrónico">
+                        <input type="email" placeholder="Correo electrónico" v-model="email" required>
                     </div>
                     <div class="form-element">
-                        <input type="password" placeholder="Contraseña">
+                        <input type="password" placeholder="Contraseña" v-model="password" required>
                     </div>
-                    <input type="submit" class="signup-btn" value="Registrarse">
+                    <input type="submit" class="signup-btn" value="Registrarse" @click="register($event)">
                 </form>
             </section>
         </main>
@@ -29,11 +29,47 @@
 
 <script>
 import LrHeader from '../Header/LrHeader.vue'
+import { fb } from '../../firebase'
 
 export default {
 
     name: "signup",
-    components:{ LrHeader }
+    components:{ LrHeader },
+    data(){
+        return {
+            username: null,
+            email: null,
+            password: null
+        }
+    },
+
+    methods:{
+        register(event){
+            event.preventDefault();
+            
+            fb.auth().createUserWithEmailAndPassword(this.email, this.password)
+            .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            if (errorCode == 'auth/weak-password'){
+                // this.$toast.error('La contraseña ingresada debe tener al menos 6 carácteres',{
+                //     duration: 5000,
+                //     position: 'top'
+                // })
+                alert('La contraseña ingresada debe tener al menos 6 carácteres');
+
+            }
+            if(errorCode == 'auth/email-already-in-use')
+                alert('Este correo ya esta usado por otra cuenta');
+
+            if(errorCode == 'auth/invalid-email')
+                alert('Correo no válido');
+                
+
+            console.log(error);
+            });
+        }
+    }
     
 }
 </script>
