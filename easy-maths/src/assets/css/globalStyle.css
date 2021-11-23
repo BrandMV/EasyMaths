@@ -11,6 +11,9 @@ html{
 body{
     font-family: 'Roboto', sans-serif;
 }
+.v-toast{
+    font-size: 2rem;
+}
 .orange-btn{
     display: inline-block;
     text-decoration: none;

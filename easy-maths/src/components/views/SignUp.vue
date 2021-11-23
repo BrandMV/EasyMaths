@@ -99,18 +99,34 @@ export default {
             // Handle Errors here.
             var errorCode = error.code;
             if (errorCode == 'auth/weak-password'){
-                // this.$toast.error('La contraseña ingresada debe tener al menos 6 carácteres',{
-                //     duration: 5000,
-                //     position: 'top'
-                // })
-                alert('La contraseña ingresada debe tener al menos 6 carácteres');
+                this.$toast.error('La contraseña ingresada debe tener al menos 6 carácteres',{
+                    duration: 5000,
+                    position: 'top'
+                })
+                // alert('La contraseña ingresada debe tener al menos 6 carácteres');
 
             }
-            if(errorCode == 'auth/email-already-in-use')
-                alert('Este correo ya esta usado por otra cuenta');
+            if(errorCode == 'auth/email-already-in-use'){
+                this.$toast.error('Este correo ya esta usado por otra cuenta',{
+                    duration: 5000,
+                    position: 'top'
+                })
+            }
+                // alert('Este correo ya esta usado por otra cuenta');
 
-            if(errorCode == 'auth/invalid-email')
-                alert('Correo no válido');
+            if(errorCode == 'auth/invalid-email'){
+                this.$toast.error('Correo no válido',{
+                    duration: 5000,
+                    position: 'top'
+                })
+            }
+            if(errorCode == 'auth/argument-error'){
+                this.$toast.error('Verifica los datos',{
+                    duration: 5000,
+                    position: 'top'
+                })
+            }
+                // alert('Correo no válido');
                 
 
             console.log(error);
@@ -205,6 +221,7 @@ export default {
         border-radius: 5px;
         transition: .3s all ease-out;
         border: none;
+        cursor: pointer;
     }
     .signup-btn:hover{
         background: #004ff8;

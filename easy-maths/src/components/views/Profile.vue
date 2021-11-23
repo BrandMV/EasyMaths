@@ -49,14 +49,14 @@
                             <div class="modal-body">
 
                                 <div class="tabs">
-                                    <button @click="updateData = true, changePassword = false">Actualizar datos</button>
-                                    <button @click="changePassword = true, updateData = false">Cambiar contraseña</button>
+                                    <button :class="[updateData ? 'active-btn' : 'non-active-btn']" @click="updateData = true, changePassword = false">Actualizar datos</button>
+                                    <button :class="[changePassword ? 'active-btn' : 'non-active-btn']" @click="changePassword = true, updateData = false">Cambiar contraseña</button>
                                 </div>
 
                                 <div v-if="updateData" class="data">
                                     <!-- Changinguser image  -->
-                                    <div class="modal-input">
-                                        <input type="file" @change="previewImage" accept="image/*" />
+                                    <div class="select-file">
+                                        <input class="modal-file" type="file" @change="previewImage" accept="image/*" />
                                     </div>
                     
                                     <div>
@@ -64,23 +64,24 @@
                                         <br>
                                         <!-- <button @click="onUploadPicture">Actualizar foto</button> -->
                                     </div>
-                                    <div class="modal-input">
+                                    <div class="form-element">
                                         <input type="text" v-model="user.name" placeholder="Nuevo nombre"/>
                                     </div>
-                                    <button @click="onUpdateProfile">Actualizar datos</button>
+                                    <button class="edit-btn" @click="onUpdateProfile">Actualizar datos</button>
                                 
                                 </div>
 
 
-                                <div v-if="changePassword" class="password-update">
-                                    <div class="modal-input">
-                                            <input type="text" placeholder="Contraseña actual"/>
+                                <div v-if="changePassword" class="data">
+                                    <div class="form-element">
+                                            <input type="password" placeholder="Contraseña actual" v-model="currentPass"/>
                                     </div>
-                                    <div class="modal-input">
-                                            <input type="text" placeholder="Contraseña nueva"/>
+                                    <div class="form-element">
+                                            <input type="password" placeholder="Nueva contraseña" v-model="newPass"/>
                                     </div>
-                                    <button class="signup-btn" @click="onChangePassword">Cambiar contraseña</button>
-
+                                    <button class="edit-btn" @click="onChangePassword">Cambiar contraseña</button>
+                                    {{ currentPass }}
+                                    {{ newPass }}
                                 </div>
 
                             </div>
@@ -124,9 +125,11 @@ export default {
             imageData: null,
             uploadValue: 0,
             changePassword: false,
-            updateData: false,
+            updateData: true,
             userID: null,
             previewPicture: null,
+            newPass:null,
+            currentPass: null,
             // user: {name: "David Meza", picture: "https://picsum.photos/200" ,email:"david@gmail.com", achievements: 5},
             title: "Mi perfil",
             showModal: false,
@@ -204,10 +207,18 @@ export default {
                 picture: this.previewPicture
                 }).then(() => {
                     this.showModal = false
+                    this.$toast.success('Perfil actualizado correctamente',{
+                    duration: 5000,
+                    position: 'bottom-right'
+                    })
 
                 })
                 .catch(e => {
                     console.log(e);
+                    this.$toast.error('Algo salió mal',{
+                    duration: 5000,
+                    position: 'bottom-right'
+                    })
                 })
                 console.log(this.picture);
             this.previewPicture = null
@@ -218,6 +229,30 @@ export default {
         */
         onChangePassword(){
 
+            const userLogged = fb.auth().currentUser
+
+            fb.auth().signInWithEmailAndPassword(userLogged.email, this.currentPass)
+            .then(user => {
+                userLogged.updatePassword(this.newPass)
+                .then(() => {
+                    this.$toast.success('Cambiaste tu contraseña exitosamente',{
+                    duration: 5000,
+                    position: 'bottom-right'
+                    })
+                })
+                .catch(( error ) => {
+                    if (error.code == 'auth/weak-password'){
+                    this.$toast.error('La nueva contraseña debe tener al menos 6 carácteres',{
+                        duration: 5000,
+                        position: 'bottom'
+                    })
+    
+                    }
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
     }
     
@@ -225,6 +260,47 @@ export default {
 </script>
 
 <style scoped>
+
+.active-btn{
+    width: 30rem;
+    height: 2.5rem;
+    color: white;
+    background: #5823C7;
+    border: none;
+    cursor: pointer;
+}
+.non-active-btn{
+    width: 30rem;
+    height: 2.5rem;
+    color: black;
+    background: transparent;
+    border: #5823C7 solid 1px;
+    cursor: pointer;
+}
+/* .tabs button{
+    width: 30rem;
+    height: 2.5rem;
+    color: white;
+    background: #5823C7;
+    border: none;
+    cursor: pointer;
+} */
+
+
+.data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.modal-file{
+    background: #e95127;
+    color: white;
+    box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    outline: none;
+    padding: 1rem;
+}
     .profile-content{
         height: 90vh;
         display: flex;
@@ -237,6 +313,25 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
+    }
+
+     .edit-btn{
+        max-width: 100vw;
+        font-weight: 700;
+        color: white;
+        width: 30vw;
+        height: 5.6rem;
+        padding: 1rem;
+        font-size: 2rem;
+        background: #e95127;
+        box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        transition: .3s all ease-out;
+        border: none;
+        cursor: pointer;
+    }
+    .edit-btn:hover{
+        background: #a02300;
     }
 
     .modal-mask {
@@ -277,6 +372,11 @@ export default {
 
 .modal-body {
   margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 .modal-default-button {
         background: none;
@@ -308,8 +408,31 @@ export default {
     transform: scale(1.1);
     }
 
+    .form-element{
+        margin-bottom: 4.8rem;
+    }
+    .form-element input{
+        max-width: 100vw;
+        width: 30vw;
+        height: 5.6rem;
+        padding: 1rem;
+        font-size: 2rem;
+        outline: none;
+        border: none;
+        box-shadow: 0px 0px 6px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        transition: .3s all ease-out;
+    }
+
+    .form-element input:focus{
+        box-shadow: 0px 0px 6px 0 #004ff8;
+    }
+
 img.preview{
-  max-width: 200px;
+    box-shadow: 0px -1px 10px 2px rgba(0, 0, 0, 0.55);
+    border-radius: 90px;
+    max-width: 20rem;
+    /* width: 50%; */
 }
 
     @media (max-width:800px) {
@@ -322,6 +445,26 @@ img.preview{
             display: block;
             align-items: center;
         }
+    }
+     @media (max-width: 450px) {
+ 
+        h1{
+            font-size: 3rem;
+        }
+        p, p a{
+            font-size: 1.5rem;
+        }
+        
+    
+        .form-element input{
+            width: 70vw;
+            font-size: 1.5rem;
+        }
+        .edit-btn{
+            font-size: 1.5rem;
+        }
+
+
     }
 
     
