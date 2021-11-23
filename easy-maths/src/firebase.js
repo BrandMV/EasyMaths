@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 require("firebase/firestore")
+import 'firebase/storage'
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAvKNOln5oR0BqzzFlna_b3Fg39tU8fD1g",

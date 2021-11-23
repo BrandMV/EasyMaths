@@ -71,7 +71,7 @@ export default {
         box-shadow: 0px -1px 10px 2px rgba(0, 0, 0, 0.55);
         border-radius: 90px;
         width: 50%;
-     
+    
     }
     i{
         font-size: 6rem;
