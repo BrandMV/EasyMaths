@@ -5,6 +5,7 @@ import SignUp from '../components/views/SignUp.vue'
 import Profile from '../components/views/Profile.vue'
 import Learn from '../components/views/Learn.vue'
 import Progress from '../components/views/Progress.vue'
+import Quiz from '../components/views/Quiz.vue'
 
 const routes = [
   {
@@ -36,6 +37,12 @@ const routes = [
     path: "/learn",
     name: "Learn",
     component: Learn
+  },
+  {
+    path: "/quiz/:category",
+    name: "Quiz",
+    component: Quiz,
+    props: true
   }
 
 

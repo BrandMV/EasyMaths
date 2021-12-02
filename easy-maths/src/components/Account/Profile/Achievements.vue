@@ -22,6 +22,7 @@ import { collapsed } from "../Sidebar/state"
 export default {
     name: "Achivements",
     props: { achievements: Array },
+
     setup(){
         return{
             collapsed

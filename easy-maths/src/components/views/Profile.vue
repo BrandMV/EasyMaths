@@ -136,12 +136,6 @@ export default {
             
         }
     },
-    // firestore(){
-    //     let current = fb.auth().currentUser
-    //     return{
-    //         user: db.collection('users').doc(current.uid)
-    //     }
-    // },
     setup() {
         return { 
             sidebarWidth, 
@@ -153,10 +147,7 @@ export default {
                 { id: 5, completed: false },
                 { id: 6, completed: false },
             ],
-            collapsed,
-            loadUserData(){
-                
-            } 
+            collapsed
     }
     },
     created(){
@@ -243,6 +234,12 @@ export default {
                 .catch(( error ) => {
                     if (error.code == 'auth/weak-password'){
                     this.$toast.error('La nueva contraseña debe tener al menos 6 carácteres',{
+                        duration: 5000,
+                        position: 'bottom'
+                    })
+                    }
+                    if (error.code == 'auth/wrong-password'){
+                    this.$toast.error('Verifica tu contraseña',{
                         duration: 5000,
                         position: 'bottom'
                     })

@@ -57,32 +57,42 @@ export default {
                         {
                             quiz: 1,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "fracciones"
                         },
                         {
                             quiz: 2,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "sucesiones"
                         },
                         {
                             quiz: 3,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "En Progreso..."
+
                         },
                         {
                             quiz: 4,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "En Progreso..."
+
                         },
                         {
                             quiz: 5,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "En Progreso..."
+
                         },
                         {
                             quiz: 6,
                             completed: false,
-                            correct: 0
+                            correct: 0,
+                            title: "En Progreso..."
+
                         },
                     ]
                 })
@@ -150,6 +160,7 @@ export default {
         align-items: center;
     }
     .login-image{
+        z-index: -1;
         width: 50%;
     }
     .login-image img{

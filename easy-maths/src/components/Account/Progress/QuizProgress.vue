@@ -1,18 +1,28 @@
 <template>
-    <div class="progress-card" :class="[ completed ? 'done' : 'notDone' ]">
-        <h2>{{title}}</h2>
-        <!-- <div class="icon">
-            <i :class="[ completed ? done : notDone ]"></i>
-        </div> -->
-    </div>
+    <router-link :to="{ name: 'Quiz', params: {category: title}}">
+        <div class="progress-card" :class="[ completed ? 'done' : 'notDone' ]" @click="getQuiz">
+            <h2>{{title}}</h2>
+            <!-- <div class="icon">
+                <i :class="[ completed ? done : notDone ]"></i>
+            </div> -->
+        </div>
+
+    </router-link>
 </template>
 
 <script>
+import { fb, db } from '../../../firebase'
+
 export default {
     name: "QuizProgress",
     props: {
         title: String,
         completed: Boolean
+    },
+    data() {
+        return {
+            quiz: null
+        }
     },
     // setup(){
     //     return{
@@ -20,6 +30,9 @@ export default {
     //         done: "fas fa-check"
     //     }
     // }
+    mounted() {
+        
+    }
 }
 </script>
 
@@ -36,6 +49,9 @@ export default {
         background: -webkit-linear-gradient(to right, #b31217, #e52d27);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #b31217, #e52d27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+    }
+    a{
+        text-decoration: none;
     }
     .progress-card{
         position: relative;
@@ -76,6 +92,7 @@ export default {
         color: white;
         font-size: 8rem;
     } */
+    
     @media (max-width: 550px) {
         h2{
             font-size: 3.5rem;
