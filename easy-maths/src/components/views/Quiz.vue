@@ -330,7 +330,7 @@ export default {
         justify-content: center;
         align-items: center;
         border-radius: 10px 10px 0px 0px;
-        background-color: #e7eae0;
+        background-color: #FFEBCC;
         /* background: #2980B9;  fallback for old browsers */
         /* background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  Chrome 10-25, Safari 5.1-6 */
         /* background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -353,7 +353,7 @@ export default {
         height: 10%;
         justify-content: center;
         border-top: 1px solid #e7eae0;
-        background-color: #e7eae0;
+        background-color: #FFEBCC;
         border-radius: 0px 0px 10px 10px;
     }
 

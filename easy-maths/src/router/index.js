@@ -6,6 +6,8 @@ import Profile from '../components/views/Profile.vue'
 import Learn from '../components/views/Learn.vue'
 import Progress from '../components/views/Progress.vue'
 import Quiz from '../components/views/Quiz.vue'
+import Fractions from '../components/views/Fractions.vue'
+import Successions from '../components/views/Successions.vue'
 
 const routes = [
   {
@@ -42,6 +44,18 @@ const routes = [
     path: "/quiz/:category",
     name: "Quiz",
     component: Quiz,
+    props: true
+  },
+  {
+    path: "/learn/Fracciones",
+    name: "Fractions",
+    component: Fractions,
+    props: true
+  },
+  {
+    path: "/learn/Sucesiones",
+    name: "Successions",
+    component: Successions,
     props: true
   }
 

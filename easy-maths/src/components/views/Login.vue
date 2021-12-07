@@ -121,7 +121,7 @@ export default {
             fb.auth().sendPasswordResetEmail(this.emailForResetPass)
             .then(() => {
                 // alert('Correo enviado, checa tus mensajes!')
-                this.$toast.success('Correo enviado, checa tus mensajes!',{
+                this.$toast.success(`Correo enviado a ${this.emailForResetPass}, checa tus mensajes!`,{
                     duration: 5000,
                     position: 'bottom-right'
                 })

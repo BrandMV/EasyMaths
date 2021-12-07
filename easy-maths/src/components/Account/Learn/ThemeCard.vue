@@ -1,8 +1,11 @@
 <template>
-    <div class="card">
-        <img :src="img" :alt="img">
-        <p>{{title}}</p>
-    </div>
+    <router-link :to="{ path: `/learn/${title}`, params: {theme: title}}">
+        <div class="card">
+            <img :src="img" :alt="img">
+            <p>{{title}}</p>
+        </div>
+    </router-link>
+    
 </template>
 
 <script>
@@ -17,6 +20,11 @@ export default {
 </script>
 
 <style scoped>
+    a{
+        font-style: none;
+        text-decoration: none;
+        color: black;
+    }
     .card{
         width: 26.9rem;
         height: 31.9rem;

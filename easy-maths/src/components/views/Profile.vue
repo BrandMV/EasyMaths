@@ -80,8 +80,7 @@
                                             <input type="password" placeholder="Nueva contraseña" v-model="newPass"/>
                                     </div>
                                     <button class="edit-btn" @click="onChangePassword">Cambiar contraseña</button>
-                                    {{ currentPass }}
-                                    {{ newPass }}
+
                                 </div>
 
                             </div>

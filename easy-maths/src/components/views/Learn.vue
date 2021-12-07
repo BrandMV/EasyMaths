@@ -18,7 +18,6 @@
 
                 </div>
             </section>
-          
         </div>
     </div>
 </template>
@@ -29,6 +28,8 @@ import Sidebar from '../Account/Sidebar/Sidebar.vue'
 import { sidebarWidth } from '../Account/Sidebar/state'
 import { collapsed } from '../Account/Sidebar/state'
 import Title from '../Account/Title.vue'
+import fraction from '../../assets/themes//fracciones.jpg'
+import Successions from '../../assets/themes/successions.png'
 
 export default {
     name: "Learn",
@@ -38,8 +39,8 @@ export default {
             sidebarWidth, collapsed,
             title: "Aprende!",
             themes: [
-                { title: "Números naturales", img: "https://picsum.photos/200" },
-                { title: "Técnicas de conteo", img: "https://picsum.photos/200" },
+                { title: "Fracciones", img: fraction },
+                { title: "Sucesiones", img: Successions },
                 { title: "Números racionales", img: "https://picsum.photos/200" },
                 { title: "Sucesiones", img: "https://picsum.photos/200" },
                 { title: "Sucesiones", img: "https://picsum.photos/200" },

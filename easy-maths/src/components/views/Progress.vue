@@ -37,13 +37,7 @@ export default {
     setup(){
         return{
             sidebarWidth, collapsed,
-            title: "Mi progreso",
-            // userQuizzes: [
-            //     {title: "Números naturales", completed: true},
-            //     {title: "Técnicas de recuento", completed: false},
-            //     {title: "Números racionales", completed: true},
-            //     {title: "Sucesiones", completed: false},
-            // ]
+            title: "Mi progreso"
         }
     },
     data() {
