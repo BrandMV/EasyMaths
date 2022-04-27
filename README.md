@@ -1,4 +1,5 @@
 # easy-maths
+Try it out! - https://easymaths.netlify.app/
 
 ## Project setup
 ```
